@@ -1,17 +1,7 @@
 body{
   background-color: #3399ff;
-  font-style: Verdana, Arial, Sans-serif;
 }
 
-h1 {
-	font-size : 20;
-	font-weight: bold;
-}
-
-p {
-	font-size: 16;
-}
-
-#header {
-	text-align : center;
+.toppad{
+  padding-top: 10px;
 }
