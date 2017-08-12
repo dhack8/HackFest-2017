@@ -1,24 +1,17 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <style>
-      html, body {
-        height: 100%;
-      }
-      body {
-        font-family: Arial;
-        font-size: 100pt;
-        text-align: center;
-        max-width: 1000px;
-        margin: 0 auto;
-        background: linear-gradient(blue, red);
-        color: white;
-      }
-    </style>
+    <meta charset="UTF-8">
+    <title>title</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=font1|font2|etc" type="text/css">
+  <link rel="stylesheet" href="stylesheet.css" type="text/css">
   </head>
 
   <body>
-    Hello.  The temperature is <%= temperature %>&deg;C.
-    It's time for some <%= food %> <%= test %>!.
+    <h1>Instagram Tracker</h1>
+    <p>
+      Followers: <%= followers %>.<br>
+      Number of likes on most recent: <%= likes %>.
+    </p>
   </body>
 </html>
