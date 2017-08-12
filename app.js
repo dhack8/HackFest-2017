@@ -47,7 +47,7 @@ exports.handleauth = function(req, res) {
           var likes = medias[0].likes;
           var comments = medias[0].comments;
           var tags = medias[0].tags;
-          var variables = {medias, followers, likes, comments, tags};
+          
 
           var top5 = JSON.parse(JSON.stringify(medias));
           top5.sort(function(a, b) {
@@ -62,6 +62,8 @@ exports.handleauth = function(req, res) {
           var totalComments = medias.reduce(function(sum, value) {
             return sum + value.comments.count;
           }, 0);
+
+          var variables = {medias, followers, likes, comments, tags, top5, totalLikes, totalComments};
 
           res.render("index.html.ejs", variables);
         });
