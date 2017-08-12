@@ -10,31 +10,6 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:700" rel="stylesheet">
   </head>
   <body>
-    <!--<nav class="navbar navbar-fixed-top navbar-dark bg-orange">
-      <div class="container">
-        <div class="navbar-inner">
-          <div class="container">
-            <a class="navbar-brand" href="#">Instagram Analytics</a>
-          </div>
-          <nav class="navbar navbar-expand-lg navbar-fixed-top navbar-dark bg-orange">
-            <div class="container">
-              <a class="navbar-brand" href="#Home">Home <span class="sr-only"></span></a>
-              <a class="navbar-brand" href="#Posts">Posts <span class="sr-only">(current)</span></a>
-              <a class="navbar-brand" href="#Profile">Profile <span class="sr-only">(current)</span></a>
-              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample07" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-
-              <div class="collapse navbar-collapse" id="navbarsExample07">
-                <form class="form-inline my-2 my-md-0">
-                  <input class="form-control" type="text" placeholder="Search" aria-label="Search">
-                </form>
-              </div>
-            </div>
-          </nav>
-        </div>
-      </div>
-    </nav>-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-orange">
   <div class="container">
     <a class="navbar-brand" href="#">Instagram Analytics</a>
@@ -59,14 +34,39 @@
     </div>
   </div>
 </nav>
+
     <div class="container">
-      <div class="jumbotron">
+      <div class="jumbotron today">
         <div class="col-sm-8 mx-auto">
-          <a name="Home"><h2>Recommendation</h2></a>
-          <p>Today, based on your previous posts:</p>
+          <a name="Home"><h2>Today</h2></a>
+          <div class="myflex">
+            <div class="flexchild">
+              <p class="title">Followers</p>
+              <h3>130</h3>
+              <p class="change">+75</p>
+            </div>
+            <div class="flexchild">
+              <p class="title">Clicks on bio URL</p>
+              <h3>54</h3>
+              <p class="change">+14</p>
+            </div>
+            <div class="flexchild">
+              <p class="title">Engagement</p>
+              <h3>2,802</h3>
+              <p class="change">+456</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="jumbotron recommend">
+        <div class="col-sm-8 mx-auto">
+          <a><h2>Recommendation</h2></a>
           <h1>Best time for you to post is<br>6 - 8pm</h1>
-          <p>
-            <a class="btn btn-primary" href="https://www.instagram.com/" role="button">Post on Instagram now</a>
+          <p class="centerText">
+            <a class="btn btn-primary" href="https://www.instagram.com/" role="button">Post now</a>
           </p>
         </div>
       </div>
@@ -76,27 +76,12 @@
       <div class="jumbotron">
         <div class="col-sm-8 mx-auto">
           <h2>Likes on latest post</h2>
+          <p>Posted on <span class="blue">Thursday at 6pm</span></p>
         </div>
       </div>
     </div>
 
-    <div class="container">
-      <div class="jumbotron">
-        <div class="col-sm-8 mx-auto">
-          <a name="Posts"><h2>Post engagement</h2></a>
-          <p>Based on likes and comments on each post, compared to your average engagemnt</p>
-          <p>Sort by</p>
-          <p>
-            <a class="btn btn-primary" href="" role="button">Most recent</a>
-          </p>
-          <p>
-            <a class="btn btn-primary" href="" role="button">Popularity</a>
-          </p>
-          <br />
-        </div>
-      </div>
-    </div>
-
+    <!--
     <div class="container">
       <div class="jumbotron">
         <div class="col-sm-8 mx-auto">
@@ -109,11 +94,66 @@
         </div>
       </div>
     </div>
+    -->
+
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+    <script>
+      google.charts.load('current', {packages: ['corechart', 'bar']});
+google.charts.setOnLoadCallback(drawColColors);
+
+function drawColColors() {
+      var data = new google.visualization.DataTable();
+      data.addColumn('timeofday', 'Time of Day');
+      data.addColumn('number', 'Motivation Level');
+
+      data.addRows([
+        [{v: [8, 0, 0], f: '8 am'}, 1],
+        [{v: [9, 0, 0], f: '9 am'}, 2],
+        [{v: [10, 0, 0], f:'10 am'}, 3],
+        [{v: [11, 0, 0], f: '11 am'}, 4],
+        [{v: [12, 0, 0], f: '12 pm'}, 5],
+        [{v: [13, 0, 0], f: '1 pm'}, 6],
+        [{v: [14, 0, 0], f: '2 pm'}, 7],
+        [{v: [15, 0, 0], f: '3 pm'}, 8],
+        [{v: [16, 0, 0], f: '4 pm'}, 9],
+        [{v: [17, 0, 0], f: '5 pm'}, 10],
+      ]);
+
+      var options = {
+        colors: ['#FD8A1D'],
+        hAxis: {
+          title: 'Time',
+          format: 'h',
+          viewWindow: {
+            min: [0, 0, 0],
+            max: [24, 0, 0]
+          },
+          gridlines: {
+          	color: 'transparent',
+            count: 12,
+          },
+          baselineColor: 'transparent'
+        },
+        vAxis: {
+        	baselineColor: 'transparent',
+          gridlines: {
+          	color: 'transparent',
+            count: 7
+          },
+        },
+        legend: {position: 'none'},
+        bar: {groupWidth: "85%"},
+      };
+
+      var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+      chart.draw(data, options);
+    }
+    </script>
   </body>
 </html>
 <!-- TOMS EJS
