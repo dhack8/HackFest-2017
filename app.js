@@ -3,6 +3,18 @@ var express = require('express');
 var api = require('instagram-node').instagram();
 var app = express();
 
+var data = require('./data.json');
+
+/*
+console.log(data.posts[0].id);
+
+app.get('/data', function(req, res) {
+  res.send(data)
+});
+
+//fetch("http://localhost:3000/data").then(res => res.json()).then(res => console.log(res));
+
+*/
 app.use(express.static("views"));
 
 api.use({
@@ -84,3 +96,4 @@ app.get('/', function(req, res) {
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!')
 })
+
