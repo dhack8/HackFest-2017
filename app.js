@@ -16,8 +16,6 @@ app.get('/data', function(req, res) {
 
 <<<<<<< HEAD
 */
-=======
->>>>>>> origin/master
 app.use(express.static("views"));
 
 api.use({
