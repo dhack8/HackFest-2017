@@ -7,49 +7,88 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <link rel="stylesheet" href="/stylesheet.css" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Catamaran" rel="stylesheet">
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-fixed-top navbar-dark bg-orange">
       <div class="container">
-        <a class="navbar-brand" href="#">Instagram Analytics</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample07" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+        <div class="navbar-inner">
+          <div class="container">
+            <a class="navbar-brand" href="#">Instagram Analytics</a>
+          </div>
+          <nav class="navbar navbar-expand-lg navbar-fixed-top navbar-dark bg-orange">
+            <div class="container">
+              <a class="navbar-brand" href="#Home">Home <span class="sr-only"></span></a>
+              <a class="navbar-brand" href="#Posts">Posts <span class="sr-only">(current)</span></a>
+              <a class="navbar-brand" href="#Profile">Profile <span class="sr-only">(current)</span></a>
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample07" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
 
-        <div class="collapse navbar-collapse" id="navbarsExample07">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Posts <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Profile <span class="sr-only">(current)</span></a>
-            </li>
-            <!--<li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown07" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-              <div class="dropdown-menu" aria-labelledby="dropdown07">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
-              </div>-->
-          </ul>
-          <form class="form-inline my-2 my-md-0">
-            <input class="form-control" type="text" placeholder="Search" aria-label="Search">
-          </form>
+              <div class="collapse navbar-collapse" id="navbarsExample07">
+                <form class="form-inline my-2 my-md-0">
+                  <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+                </form>
+              </div>
+            </div>
+          </nav>
         </div>
       </div>
     </nav>
+
+<script type="text/javascript">
+$(function(){
+    var $page = jQuery.url.attr("index.htlm.ejs");
+    $('a').each(function(){
+        var $href = $(this).attr('href');
+        if ( ($href == $page) || ($href == '') ) {
+            $(this).addClass('on');
+        } else {
+            $(this).removeClass('on');
+        }
+    });
+});
+</script>
+
     <div class="container">
       <div class="jumbotron">
         <div class="col-sm-8 mx-auto">
-          <h1>Navbar examples</h1>
-          <p>This example is a quick exercise to illustrate how the navbar and its contents work. Some navbars extend the width of the viewport, others are confined within a <code>.container</code>. For positioning of navbars, checkout the <a href="../navbar-top/">top</a> and <a href="../navbar-top-fixed/">fixed top</a> examples.</p>
-          <p>At the smallest breakpoint, the collapse plugin is used to hide the links and show a menu button to toggle the collapsed content.</p>
+          <a name="Home"><h2>Recommendation</h2></a>
+          <p>Today, based on your previous posts:</p>
+          <h1>Best time for you to post is<br>6 - 8pm</h1>
           <p>
-            <a class="btn btn-primary" href="../../components/navbar/" role="button">View navbar docs »</a>
+            <a class="btn btn-primary" href="https://www.instagram.com/" role="button">Post on Instagram now</a>
           </p>
+          <h2>Likes on latest post</h2>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="jumbotron">
+        <div class="col-sm-8 mx-auto">
+          <a name="Posts"><h2>Post engagement</h2></a>
+          <p>Based on likes and comments on each post, compared to your average engagemnt</p>
+          <p>Sort by</p>
+          <p>
+            <a class="btn btn-primary" href="" role="button">Most recent</a>
+          </p>
+          <p>
+            <a class="btn btn-primary" href="" role="button">Popularity</a>
+          </p>
+          <br />
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="jumbotron">
+        <div class="col-sm-8 mx-auto">
+          <a name="Profile"><h2>This week</h2></a>
+          <p>followers    Clicks on bio URL    Engagement</p>
+          <h2>Location</h2>
+          <img src="cat.jpg" width="250" height="200" class = image alt = "cat"/>
+          <h2>Your followers' followers</h2>
         </div>
       </div>
     </div>
@@ -60,3 +99,9 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
   </body>
 </html>
+<!-- TOMS EJS
+<p>Followers: <%= followers.map(follower => follower.username).join(", ") %>.<br>
+Likes on most recent: <%= likes.count %>.<br>
+Comments on most recent: <%= comments.count %>.<br>
+Number of tags: <%= tags %></p>
+-->
