@@ -3,6 +3,7 @@ var express = require('express');
 var api = require('instagram-node').instagram();
 var app = express();
 
+app.use(express.static("views"));
 
 api.use({
   client_id: '2baab622a9d44a9d962742f3ba2ae74d',
@@ -40,7 +41,7 @@ exports.handleauth = function(req, res) {
         var variables = {medias};
         res.render("index.html.ejs", variables);
       });
-      
+
     }
   });
 };
@@ -57,4 +58,3 @@ app.get('/', function(req, res) {
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!')
 })
-
