@@ -43,6 +43,10 @@ app.get('/authorize_user', exports.authorize_user);
 // This is your redirect URI
 app.get('/handleauth', exports.handleauth);
 
+app.get('/', function(req, res) {
+  res.redirect('/authorize_user');
+});
+
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!')
 })
