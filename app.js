@@ -43,11 +43,26 @@ exports.handleauth = function(req, res) {
           console.log(users);
 
           
-          var followers = users;
+          var followers = users; //.length?
           var likes = medias[0].likes;
           var comments = medias[0].comments;
           var tags = medias[0].tags;
           var variables = {medias, followers, likes, comments, tags};
+
+          var top5 = JSON.parse(JSON.stringify(medias));
+          top5.sort(function(a, b) {
+            return b.likes.count - a.likes.count;
+          });
+          top5 = top5.slice(0, 5);
+
+          var totalLikes = medias.reduce(function(sum, value) {
+            return sum + value.likes.count;
+          }, 0);
+
+          var totalComments = medias.reduce(function(sum, value) {
+            return sum + value.comments.count;
+          }, 0);
+
           res.render("index.html.ejs", variables);
         });
 
