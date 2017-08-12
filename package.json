@@ -12,6 +12,7 @@
   "dependencies": {
     "ejs": "^2.5.7",
     "express": "^4.14.0",
+    "instagram-node": "^0.5.8",
     "passport-instagram": "^1.0.0",
     "request": "^2.74.0",
     "request-promise-native": "^1.0.3"
