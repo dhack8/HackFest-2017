@@ -14,7 +14,7 @@ app.set("view engine", "ejs");
 var redirect_uri = 'http://127.0.0.1:3000/handleauth';
 
 exports.authorize_user = function(req, res) {
-  res.redirect(api.get_authorization_url(redirect_uri, { scope: ['likes'], state: 'a state' }));
+  res.redirect(api.get_authorization_url(redirect_uri, { scope: ['likes', 'follower_list'], state: 'a state' }));
 };
 
 exports.handleauth = function(req, res) {
@@ -37,8 +37,19 @@ exports.handleauth = function(req, res) {
         console.log(remaining);
         console.log(limit);
 
-        var variables = {medias};
-        res.render("index.html.ejs", variables);
+        api.user_followers(medias[0].user.id, function(err, users, pagination, remaining, limit) {
+          console.log(err);
+          console.log(users);
+
+          
+          var followers = users;
+          var likes = medias[0].likes;
+          var comments = medias[0].comments;
+          var tags = medias[0].tags;
+          var variables = {medias, followers, likes, comments, tags};
+          res.render("index.html.ejs", variables);
+        });
+
       });
       
     }
