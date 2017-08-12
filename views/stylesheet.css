@@ -1,3 +1,14 @@
 body{
   background-color: #3399ff;
 }
+
+h1 {
+	font-size : 20;
+	font-weight: bold;
+	font-style: Verdana, Arial, Sans-serif;
+}
+
+p {
+	font-size: 14;
+	font-style: Verdana, Arial, Sans-serif;
+}

@@ -11,3 +11,8 @@ followers
 clicks on url
 
 top 5 posts
+
+<!--Followers: <%= followers %>.<br>
+      Likes on most recent: <%= likes %>.<br>
+      Comments on most recent: <%= comments %>.<br>
+      Number of tags: <%= tags %>.-->
