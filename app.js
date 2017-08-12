@@ -1,39 +1,207 @@
-var express = require('express');
-var request = require('request-promise-native');
+var passport = require('passport');
+var config = require('./oauth.js');
+var InstagramStrategy = require('passport-instagram').Strategy;
+
+
+
+
+// serialize and deserialize
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+passport.deserializeUser(function(obj, done) {
+  done(null, obj);
+});
+
+// config
+passport.use(new InstagramStrategy({
+  clientID: config.instagram.clientID,
+  clientSecret: config.instagram.clientSecret,
+  callbackURL: config.instagram.callbackURL
+  },
+  function(accessToken, refreshToken, profile, done) {
+    process.nextTick(function () {
+      return done(null, profile);
+    });
+  }
+));
+
 var app = express();
 
-app.use(express.static("public"));
-app.set("view engine", "ejs");
+app.configure(function() {
+  app.set('views', __dirname + '/views');
+  app.set('view engine', 'jade');
+  app.use(express.logger());
+  app.use(express.cookieParser());
+  app.use(express.bodyParser());
+  app.use(express.methodOverride());
+  app.use(express.session({ secret: 'my_precious' }));
+  app.use(passport.initialize());
+  app.use(passport.session());
+  app.use(app.router);
+  app.use(express.static(__dirname + '/public'));
+});
 
-var forecastIOKey = "469e0510219cb2c1d7da0282251e37e0"; // FIXME : replace with your API key gained from forecast.io
+// routes
+app.get('/', routes.index);
+app.get('/ping', routes.ping);
+app.get('/account', ensureAuthenticated, function(req, res){
+  res.render('account', { user: req.user });
+});
 
-function requestTemperature() {
-  var url = "https://api.forecast.io/forecast/" + forecastIOKey + "/-41.2865,174.7762";
+app.get('/', function(req, res){
+  res.render('login', { user: req.user });
+});
 
-  return request({url: url, json: true}).then(data => {
-    var temperature = data.currently.temperature;
-    var celsius = (temperature - 32) * 5 / 9;
-
-    return Math.round(celsius * 10) / 10;
+app.get('/auth/facebook',
+  passport.authenticate('facebook'),
+  function(req, res){});
+app.get('/auth/facebook/callback',
+  passport.authenticate('facebook', { failureRedirect: '/' }),
+  function(req, res) {
+    res.redirect('/account');
   });
-};
 
-function determineFood(temperature) {
-  if (temperature > 18) {
-    return "ice cream"; 
-  }
-  else {
-    return "fried noodles";
-  }
+app.get('/logout', function(req, res){
+  req.logout();
+  res.redirect('/');
+});
+
+// port
+app.listen(1337);
+
+// test authentication
+function ensureAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) { return next(); }
+  res.redirect('/');
 }
 
-app.get("/", (req, res) => {
-  requestTemperature().then(temperature => {
-    var food = determineFood(temperature);
-    var test = "SWAG";
-    var variables = {temperature, food, test};
-    res.render("index.html.ejs", variables);
+
+
+
+
+
+
+
+var express = require('express')
+  , passport = require('passport')
+  , util = require('util')
+  , InstagramStrategy = require('passport-instagram').Strategy;
+
+var INSTAGRAM_CLIENT_ID = "--insert-instagram-client-id-here--"
+var INSTAGRAM_CLIENT_SECRET = "--insert-instagram-client-secret-here--";
+
+
+// Passport session setup.
+//   To support persistent login sessions, Passport needs to be able to
+//   serialize users into and deserialize users out of the session.  Typically,
+//   this will be as simple as storing the user ID when serializing, and finding
+//   the user by ID when deserializing.  However, since this example does not
+//   have a database of user records, the complete Instagram profile is
+//   serialized and deserialized.
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function(obj, done) {
+  done(null, obj);
+});
+
+
+// Use the InstagramStrategy within Passport.
+//   Strategies in Passport require a `verify` function, which accept
+//   credentials (in this case, an accessToken, refreshToken, and Instagram
+//   profile), and invoke a callback with a user object.
+passport.use(new InstagramStrategy({
+    clientID: INSTAGRAM_CLIENT_ID,
+    clientSecret: INSTAGRAM_CLIENT_SECRET,
+    callbackURL: "http://localhost:3000/auth/instagram/callback"
+  },
+  function(accessToken, refreshToken, profile, done) {
+    // asynchronous verification, for effect...
+    process.nextTick(function () {
+      
+      // To keep the example simple, the user's Instagram profile is returned to
+      // represent the logged-in user.  In a typical application, you would want
+      // to associate the Instagram account with a user record in your database,
+      // and return that user instead.
+      return done(null, profile);
+    });
+  }
+));
+
+
+
+
+var app = express.createServer();
+
+// configure Express
+app.configure(function() {
+  app.set('views', __dirname + '/views');
+  app.set('view engine', 'ejs');
+  app.use(express.logger());
+  app.use(express.cookieParser());
+  app.use(express.bodyParser());
+  app.use(express.methodOverride());
+  app.use(express.session({ secret: 'keyboard cat' }));
+  // Initialize Passport!  Also use passport.session() middleware, to support
+  // persistent login sessions (recommended).
+  app.use(passport.initialize());
+  app.use(passport.session());
+  app.use(app.router);
+  app.use(express.static(__dirname + '/public'));
+});
+
+
+app.get('/', function(req, res){
+  res.render('index', { user: req.user });
+});
+
+app.get('/account', ensureAuthenticated, function(req, res){
+  res.render('account', { user: req.user });
+});
+
+app.get('/login', function(req, res){
+  res.render('login', { user: req.user });
+});
+
+// GET /auth/instagram
+//   Use passport.authenticate() as route middleware to authenticate the
+//   request.  The first step in Instagram authentication will involve
+//   redirecting the user to instagram.com.  After authorization, Instagram
+//   will redirect the user back to this application at /auth/instagram/callback
+app.get('/auth/instagram',
+  passport.authenticate('instagram'),
+  function(req, res){
+    // The request will be redirected to Instagram for authentication, so this
+    // function will not be called.
   });
+
+// GET /auth/instagram/callback
+//   Use passport.authenticate() as route middleware to authenticate the
+//   request.  If authentication fails, the user will be redirected back to the
+//   login page.  Otherwise, the primary route function function will be called,
+//   which, in this example, will redirect the user to the home page.
+app.get('/auth/instagram/callback', 
+  passport.authenticate('instagram', { failureRedirect: '/login' }),
+  function(req, res) {
+    res.redirect('/');
+  });
+
+app.get('/logout', function(req, res){
+  req.logout();
+  res.redirect('/');
 });
 
 app.listen(3000);
+
+
+// Simple route middleware to ensure user is authenticated.
+//   Use this route middleware on any resource that needs to be protected.  If
+//   the request is authenticated (typically via a persistent login session),
+//   the request will proceed.  Otherwise, the user will be redirected to the
+//   login page.
+function ensureAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) { return next(); }
+  res.redirect('/login')
+}
