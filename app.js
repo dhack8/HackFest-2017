@@ -5,7 +5,7 @@ var app = express();
 
 var data = require('./data.json');
 
-
+/*
 console.log(data.posts[0].id);
 
 app.get('/data', function(req, res) {
@@ -14,7 +14,7 @@ app.get('/data', function(req, res) {
 
 //fetch("http://localhost:3000/data").then(res => res.json()).then(res => console.log(res));
 
-/*
+*/
 app.use(express.static("views"));
 
 api.use({
@@ -54,12 +54,12 @@ exports.handleauth = function(req, res) {
           console.log(err);
           console.log(users);
 
-          
+
           var followers = users; //.length?
           var likes = medias[0].likes;
           var comments = medias[0].comments;
           var tags = medias[0].tags;
-          
+
 
           var top5 = JSON.parse(JSON.stringify(medias));
           top5.sort(function(a, b) {
@@ -94,9 +94,8 @@ app.get('/handleauth', exports.handleauth);
 app.get('/', function(req, res) {
   res.redirect('/authorize_user');
 });
-*/
+
 
 app.listen(3000, function () {
   console.log('App listening on port 3000!')
 })
-
