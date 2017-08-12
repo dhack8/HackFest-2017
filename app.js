@@ -14,7 +14,10 @@ app.get('/data', function(req, res) {
 
 //fetch("http://localhost:3000/data").then(res => res.json()).then(res => console.log(res));
 
+<<<<<<< HEAD
 */
+=======
+>>>>>>> origin/master
 app.use(express.static("views"));
 
 api.use({
