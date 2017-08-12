@@ -44,6 +44,10 @@
     <div class="container">
       <div class="jumbotron">
         <div class="col-sm-8 mx-auto">
+        <p>Followers: <%= followers.map(follower => follower.username).join(", ") %>.<br>
+      Likes on most recent: <%= likes.count %>.<br>
+      Comments on most recent: <%= comments.count %>.<br>
+      Number of tags: <%= tags %></p>
           <h2>Best time to post today</h2>
           <h1>6 - 8pm</h1>
           <p>
