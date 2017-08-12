@@ -14,7 +14,6 @@ app.get('/data', function(req, res) {
 
 //fetch("http://localhost:3000/data").then(res => res.json()).then(res => console.log(res));
 
-/*
 app.use(express.static("views"));
 
 api.use({
@@ -94,7 +93,7 @@ app.get('/handleauth', exports.handleauth);
 app.get('/', function(req, res) {
   res.redirect('/authorize_user');
 });
-*/
+
 
 app.listen(3000, function () {
   console.log('App listening on port 3000!')
