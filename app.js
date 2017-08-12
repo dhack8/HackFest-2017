@@ -5,7 +5,12 @@ var app = express();
 
 var latestpostlikes = require('./latestpostlikes.json');
 
+<<<<<<< HEAD
 
+=======
+/*
+console.log(data.posts[0].id);
+>>>>>>> a077417d5ebb4d92b0c831fd49a3711419764ec4
 
 console.log(latestpostlikes.posts[0].id);
 
@@ -15,6 +20,7 @@ app.get('/latestpostlikes', function(req, res) {
 
 //fetch("http://localhost:3000/data").then(res => res.json()).then(res => console.log(res));
 
+<<<<<<< HEAD
 
 
 /*get best time
@@ -28,6 +34,10 @@ app.get('/besttime', function(req,res){
 
 
 
+=======
+<<<<<<< HEAD
+*/
+>>>>>>> a077417d5ebb4d92b0c831fd49a3711419764ec4
 app.use(express.static("views"));
 
 api.use({
@@ -67,12 +77,17 @@ var handleauth = function(req, res) {
           console.log(err);
           console.log(users);
 
+<<<<<<< HEAD
           
           var followers = users;
+=======
+
+          var followers = users; //.length?
+>>>>>>> a077417d5ebb4d92b0c831fd49a3711419764ec4
           var likes = medias[0].likes;
           var comments = medias[0].comments;
           var tags = medias[0].tags;
-          
+
 
           var top5 = JSON.parse(JSON.stringify(medias));
           top5.sort(function(a, b) {
@@ -112,4 +127,3 @@ app.get('/', function(req, res) {
 app.listen(3000, function () {
   console.log('App listening on port 3000!')
 })
-
