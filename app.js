@@ -1,80 +1,49 @@
-var passport = require('passport');
-var config = require('./oauth.js');
-var InstagramStrategy = require('passport-instagram').Strategy;
-
-
-
-
-// serialize and deserialize
-passport.serializeUser(function(user, done) {
-  done(null, user);
-});
-passport.deserializeUser(function(obj, done) {
-  done(null, obj);
-});
-
-// config
-passport.use(new InstagramStrategy({
-  clientID: config.instagram.clientID,
-  clientSecret: config.instagram.clientSecret,
-  callbackURL: config.instagram.callbackURL
-  },
-  function(accessToken, refreshToken, profile, done) {
-    process.nextTick(function () {
-      return done(null, profile);
-    });
-  }
-));
-
+var http = require('http');
+var express = require('express');
+var api = require('instagram-node').instagram();
 var app = express();
 
-app.configure(function() {
-  app.set('views', __dirname + '/views');
-  app.set('view engine', 'jade');
-  app.use(express.logger());
-  app.use(express.cookieParser());
-  app.use(express.bodyParser());
-  app.use(express.methodOverride());
-  app.use(express.session({ secret: 'my_precious' }));
-  app.use(passport.initialize());
-  app.use(passport.session());
-  app.use(app.router);
-  app.use(express.static(__dirname + '/public'));
+
+api.use({
+  client_id: '2baab622a9d44a9d962742f3ba2ae74d',
+  client_secret: 'd5145e8c983745f0bef2263a20f9d9bc'
 });
 
-// routes
-app.get('/', routes.index);
-app.get('/ping', routes.ping);
-app.get('/account', ensureAuthenticated, function(req, res){
-  res.render('account', { user: req.user });
-});
+var redirect_uri = 'http://127.0.0.1:3000/handleauth';
 
-app.get('/', function(req, res){
-  res.render('login', { user: req.user });
-});
+exports.authorize_user = function(req, res) {
+  res.redirect(api.get_authorization_url(redirect_uri, { scope: ['likes'], state: 'a state' }));
+};
 
-app.get('/auth/instagram',
-  passport.authenticate('instagram'),
-  function(req, res){});
-app.get('/auth/instagram/callback',
-  passport.authenticate('instagram', { failureRedirect: '/' }),
-  function(req, res) {
-    res.redirect('/account');
+exports.handleauth = function(req, res) {
+  api.authorize_user(req.query.code, redirect_uri, function(err, result) {
+    if (err) {
+      console.log(err.body);
+      res.send("Didn't work");
+    } else {
+      console.log('Yay! Access token is ' + result.access_token);
+      api.use({
+        access_token: result.access_token
+      });
+
+      api.user_self_media_recent(function(err, medias, pagination, remaining, limit) {
+        console.log(err);
+        console.log(medias);
+        console.log(pagination);
+        console.log(remaining);
+        console.log(limit);
+      });
+      res.send('You made it!!');
+    }
   });
+};
 
-app.get('/logout', function(req, res){
-  req.logout();
-  res.redirect('/');
-});
+// This is where you would initially send users to authorize
+app.get('/authorize_user', exports.authorize_user);
+// This is your redirect URI
+app.get('/handleauth', exports.handleauth);
 
-// port
-app.listen(3000);
-
-// test authentication
-function ensureAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) { return next(); }
-  res.redirect('/');
-}
-
-
+app.listen(3000, function () {
+  console.log('Example app listening on port 3000!')
+})
 
