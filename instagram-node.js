@@ -8,7 +8,8 @@ app.configure(function() {
 });
 
 api.use({client_id: '',
-		client_secret: ''});
+		client_secret: ''
+});
 
 var redirect_uri = '';
 
@@ -21,7 +22,7 @@ exports.handleauth = function(req, res) {
 		if (err) {
 			console.log(err.body);
 			res.send("Fail");
-		else {
+		} else {
 			console.log('Access Token: ' + result.access_token);
 			res.send("Hello!");
 		}
