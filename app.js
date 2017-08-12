@@ -16,7 +16,7 @@ app.get('/data', function(req, res) {
 
 <<<<<<< HEAD
 */
-app.use(express.static("views"));
+app.use(express.static("static"));
 
 api.use({
   client_id: '2baab622a9d44a9d962742f3ba2ae74d',
@@ -93,7 +93,8 @@ app.get('/authorize_user', exports.authorize_user);
 app.get('/handleauth', exports.handleauth);
 
 app.get('/', function(req, res) {
-  res.redirect('/authorize_user');
+  res.sendFile('static/index.html');
+  //res.redirect('/authorize_user');
 });
 
 

@@ -12,7 +12,7 @@ clicks on url
 
 top 5 posts
 
-<!--Followers: <%= followers.map(follower => follower.username).join(", ") %>.<br>
+<!--Followers: <%= followers.count %>.<br>
 	Likes on most recent: <%= likes.count %>.<br>
 	Comments on most recent: <%= comments.count %>.<br>
 	Number of tags: <%= tags %>.-->
