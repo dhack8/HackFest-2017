@@ -9,6 +9,8 @@ api.use({
   client_secret: 'd5145e8c983745f0bef2263a20f9d9bc'
 });
 
+app.set("view engine", "ejs");
+
 var redirect_uri = 'http://127.0.0.1:3000/handleauth';
 
 exports.authorize_user = function(req, res) {
@@ -29,11 +31,16 @@ exports.handleauth = function(req, res) {
       api.user_self_media_recent(function(err, medias, pagination, remaining, limit) {
         console.log(err);
         console.log(medias);
+        console.log(medias[0].id);
+        console.log(medias[0].user.id);
         console.log(pagination);
         console.log(remaining);
         console.log(limit);
+
+        var variables = {medias};
+        res.render("index.html.ejs", variables);
       });
-      res.send('You made it!!');
+      
     }
   });
 };
