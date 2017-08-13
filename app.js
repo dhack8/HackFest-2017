@@ -5,7 +5,7 @@ var app = express();
 
 var latestpostlikes = require('./latestpostlikes.json');
 
-var port = process.env.PORT || 8080;
+var port = process.env.PORT || 3000;
 
 
 console.log(latestpostlikes.posts[0].id);
