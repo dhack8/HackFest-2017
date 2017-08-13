@@ -87,6 +87,15 @@ function populateData (req,res) {
 // }
 
 
+app.get('/timeofmostrecentpost', function(req,res){
+
+
+  var time = 1502594035;
+
+  res.send({time});
+});
+
+
 var prevLikes = 2;
 
 app.get('/likestoday', function(req,res){
@@ -112,7 +121,7 @@ var prevComments = 3;
 
 app.get('/commentstoday', function(req,res){
     if(!mediaSaved){
-      var commentsTdy= 4;
+      var commentsTdy= 6;
       res.send({commentsTdy});
     }
     else{
@@ -149,7 +158,7 @@ else{
 
 app.get('/totalcomments', function(req,res){
     if(!mediaSaved){
-      var totalComments = 3;
+      var totalComments = 9;
       res.send({totalComments})
     }
     else{
@@ -163,33 +172,51 @@ app.get('/totalcomments', function(req,res){
 });
 
 
-
+var prevFollowers = 2;
 app.get('/followerstoday', function(req,res){
+if(!followersSaved){
 
 
-  var tf = followersSaved ? followersSaved.length : 2;
+    var totfol = 3;
+    res.send({totfol});
+}
+else{
 
   var totfol = followersSaved.length - prevFollowers;
 
   res.send({totfol});
+}
+
+
 });
 
-var prevFollowers = 2;
+
 
 app.get('/totalfollowers', function(req,res){
-
-  var totfol = followersSaved ? followersSaved.length : 0;
+  if(!followersSaved){
+    var totfol = 3;
+    res.send({totfol});
+  }
+  else{
+    var totfol = followersSaved;
 
   res.send({totfol});
+  }
+  
 
 });
 
 
 app.get('/engagementtoday', function(req, res){
 
+  var engtoday = 10;
+  res.send({engtoday});
+
 });
 
 app.get('/totalengagement', function(req, res){
+   var toteng = 6;
+  res.send({toteng});
 
 });
 
@@ -207,7 +234,7 @@ var calcbesthour = function(latestpostlikes){
       }
   });
   return {
-    bestHourMessage: "Best time for you to post is<br>" + TIMES_MAP[bestHour]
+    bestHourMessage: "Best time for you to post is" + TIMES_MAP[bestHour]
   };
 };
 
@@ -303,26 +330,26 @@ const TIMES_MAP = {
         "00": "12 am",
         "01": "1 am",
         "02": "2 am",
-        "03": 60,
-        "04": 40,
-        "05": 80,
-        "06": 60,
-        "07": 20,
-        "08": 10,
-        "09": 0,
-        "10": 0,
-        "11": 10,
-        "12": 15,
-        "13": 30,
-        "14": 60,
-        "15": 10,
-        "16": 40,
-        "17": 10,
-        "18": 5,
-        "19": 3,
-        "20": 0,
-        "21": 3,
-        "22": 10,
-        "23": 8
+        "03": "3 am",
+        "04": "4 am",
+        "05": "5 am",
+        "06": "6 am",
+        "07": "7 am",
+        "08": "8 am",
+        "09": "9 am",
+        "10": "10 am",
+        "11": "11 am",
+        "12": "12 pm",
+        "13": "1 pm",
+        "14": "2 pm",
+        "15": "3 pm",
+        "16": "4 pm",
+        "17": "5 pm",
+        "18": "6 pm",
+        "19": "7 pm",
+        "20": "8 pm",
+        "21": "9 pm",
+        "22": "10 pm",
+        "23": "11 pm"
 
 }
