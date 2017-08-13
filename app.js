@@ -177,14 +177,14 @@ app.get('/followerstoday', function(req,res){
 if(!followersSaved){
 
 
-    var totfol = 3;
-    res.send({totfol});
+    var folToday = 3;
+    res.send({folToday});
 }
 else{
 
-  var totfol = followersSaved.length - prevFollowers;
+  var folToday = followersSaved.length - prevFollowers;
 
-  res.send({totfol});
+  res.send({folToday});
 }
 
 
@@ -194,7 +194,7 @@ else{
 
 app.get('/totalfollowers', function(req,res){
   if(!followersSaved){
-    var totfol = 3;
+    var totfol = 9;
     res.send({totfol});
   }
   else{
@@ -209,13 +209,13 @@ app.get('/totalfollowers', function(req,res){
 
 app.get('/engagementtoday', function(req, res){
 
-  var engtoday = 10;
+  var engtoday = 5;
   res.send({engtoday});
 
 });
 
 app.get('/totalengagement', function(req, res){
-   var toteng = 6;
+   var toteng = 139;
   res.send({toteng});
 
 });

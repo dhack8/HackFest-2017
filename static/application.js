@@ -5,15 +5,27 @@
 	});
 
 	$.get('/likestoday', (data) => {
-		$('#likes').text(data.likesTdy);
+		$('#likesToday').text(data.likesTdy);
 	});
 
 	$.get('/followerstoday', (data) => {
-		$('#followers').text(data.totfol);
+		$('#followersToday').text(data.folToday);
 	});
 
 	$.get('/engagementtoday', (data) => {
-		$('#engagement').text(data.engtoday);
+		$('#engagementToday').text(data.engtoday);
+	});
+
+	$.get('/totallikes', (data) => {
+		$('#likes').text(data.totallikes);
+	});
+
+	$.get('/totalfollowers', (data) => {
+		$('#followers').text(data.totfol);
+	});
+
+	$.get('/totalengagement', (data) => {
+		$('#engagement').text(data.toteng);
 	});
 
 	var ctx = document.getElementById("myChart").getContext('2d');
