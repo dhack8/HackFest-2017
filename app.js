@@ -5,6 +5,10 @@ var app = express();
 
 var latestpostlikes = require('./latestpostlikes.json');
 
+var port = process.env.PORT || 3000;
+
+
+console.log(latestpostlikes.posts[0].id);
 
 app.get('/latestpostlikes', function(req, res) {
   res.send(latestpostlikes.posts[0]);
@@ -290,8 +294,8 @@ app.get('/', function(req, res) {
   res.redirect('/authorize_user');
 });
 
-app.listen(3000, function () {
-  console.log('App listening on port 3000!')
+app.listen(port, function () {
+  console.log('App listening on port ' + port)
 });
 
 
