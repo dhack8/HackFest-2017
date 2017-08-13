@@ -84,11 +84,15 @@ body{
 
 .btn, .btn:hover {
 	display: inline:block;
-	border-color: #67C3EF;
-	background-color: #FFF;
-	border-radius: 18px;
+	border-color: #73C8F0;
+	background-color: #73C8F0;
+	color: #FFF;
+	border-radius: 30px;
 	margin-left: auto;
 	margin-right: auto;
+	padding: 13px;
+	padding-left: 78px;
+	padding-right: 78px;
 }
 
 .centerText{
@@ -98,7 +102,7 @@ body{
 }
 
 .btn-primary, .btn-primary:hover {
-	color: #67C3EF;
+	color: #FFF;
 }
 
 h1{
