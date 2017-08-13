@@ -1,7 +1,7 @@
 
 (function () {
 	$.get('/besthourtopost', (data) => {
-		$('.container h1').text(data.bestHourMessage);
+		$('.recoInsert').text(data.bestHourMessage);
 	});
 
 	$.get('/likestoday', (data) => {
