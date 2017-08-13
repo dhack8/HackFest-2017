@@ -3,11 +3,20 @@
 	$.get('/besthourtopost', (data) => {
 		$('.container h1').text(data.bestHourMessage);
 	});
+
+	$.get('/likestoday', (data) => {
+		$('#likes').text(data.likesTdy);
+	});
+
+	$.get('/followerstoday', (data) => {
+		$('#followers').text(data.totfol);
+	});
+
 	var ctx = document.getElementById("myChart").getContext('2d');
 	var myChart = new Chart(ctx, {
     	type: 'line',
     	data: {
-        	labels: [0,1,2,3,4,5,6,7,8,9,10,11,12,1,2,3,4,5,6,7,8,9,10,11,12],
+        	labels: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24],
         	datasets: [{
             	data: [120,130,100,60,40,80,60,20,10,0,0,10,15,30,60,10,40,10,5,3,0,3,10,8],
             	backgroundColor: 'rgba(255, 160, 71, 0.2)',
