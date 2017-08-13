@@ -119,3 +119,15 @@ h2{
 li {
 	list-style-type: none;
 }
+
+.uFontRegular{
+ font-weight: 400;
+}
+
+.uFontMedium{
+ font-weight: 500;
+}
+
+.uFontBold{
+ font-weight: 700;
+}
