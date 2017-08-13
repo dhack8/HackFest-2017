@@ -23,12 +23,6 @@ var calcbesthour = function(latestpostlikes){
           besthourCount = countForHour;
       }
   });
-
-  var low = null;
-  var high = null;
-
-
-
   return {
     bestHourMessage: "Best time for you to post is: " + bestHour
   };
@@ -39,13 +33,6 @@ app.get('/besthourtopost', function(req, res){
   res.send(besthour);
 
 });
-
-
-app.get('')
-
-
-
-
 
 //fetch("http://localhost:3000/data").then(res => res.json()).then(res => console.log(res));
 app.use(express.static("static"));
@@ -128,7 +115,6 @@ app.get('/', function(req, res) {
   //res.sendFile('static/index.html');
   res.redirect('/authorize_user');
 });
-
 
 app.listen(3000, function () {
   console.log('App listening on port 3000!')
