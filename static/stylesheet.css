@@ -33,14 +33,23 @@ body{
 	height: 64px;
 	background-color: #FD8A1D;
 	width: 100%;
-	line-height: 64px;
+	line-height: 28px;
 	color: #FFF;
 	font-weight: bold;
+	align-items: center;
 }
 
 .menuItem{
 	text-align: center;
 	flex: 1 1 100%;
+}
+
+.isActive{
+	box-shadow: 0 3px 0 0 #FFF;
+}
+
+.menuItem a{
+	display: inline-block;
 }
 
 .myflex{
