@@ -15,29 +15,83 @@ var mediaSaved;
 var followersSaved;
 var isLoggedIn;
 
-function populateData(){
+function populateData (req,res) {
+  api.authorize_user(req.query.code, redirect_uri, function(err, result) {
+    if (err) {
+      //console.log(err.body);
+      res.send("Didn't work");
+    } else {
+      isLoggedIn = true;
+      console.log("Connection succeeded. Access token is"  + result.access_token);
+      api.use({
+        access_token: result.access_token
+      });
+      console.log(result.access_token);
 
-}
+      api.user_self_media_recent(function(err, medias, pagination, remaining, limit) {
+       mediaSaved = medias;
+       //console.log(medias);
+       //console.log(mediaSaved);
 
-var calclikestoday = function(){
+        api.user_followers(medias[0].user.id, function(err, users, pagination, remaining, limit) {
+          followersSaved = users;
+          // console.log(err);
+          // console.log(users);
 
-  api.user_self_media_recent(function(err, medias, pagination, remaining, limit) {
-    var totalLikes = medias.reduce(function(sum, value) {
+          var followers = users;
+
+          var likes = medias[0].likes;
+          var comments = medias[0].comments;
+          var tags = medias[0].tags;
+
+
+          var top5 = JSON.parse(JSON.stringify(medias));
+          top5.sort(function(a, b) {
+            return b.likes.count - a.likes.count;
+          });
+          top5 = top5.slice(0, 5);
+
+          var totalLikes = medias.reduce(function(sum, value) {
             return sum + value.likes.count;
           }, 0);
 
+          var totalComments = medias.reduce(function(sum, value) {
+            return sum + value.comments.count;
+          }, 0);
 
-    return totalLikes;
+          var variables = {medias, followers, likes, comments, tags, top5, totalLikes, totalComments};
+
+          //res.render("index.html.ejs", variables);
+        });
+
+      });
+
+    }
   });
 }
+
+// var calclikestoday = function(){
+
+//   api.user_self_media_recent(function(err, medias, pagination, remaining, limit) {
+//     var totalLikes = medias.reduce(function(sum, value) {
+//             return sum + value.likes.count;
+//           }, 0);
+
+
+//     return totalLikes;
+//   });
+// }
 
 
 var prevLikes = 2;
 
 app.get('/likestoday', function(req,res){
-    if(!isLoggedIn){
-      res.redirect('/authorize_user');
+    if(!mediaSaved){
+      var likesTdy = 2;
+      res.send({likesTdy});
     }
+    else{
+
 
     var totalLikes = mediaSaved.reduce(function(sum, value) {
             return sum + value.likes.count;
@@ -47,14 +101,17 @@ app.get('/likestoday', function(req,res){
     var likesTdy = totalLikes - prevLikes;
 
     res.send({likesTdy});
+  }
 });
 
 var prevComments = 3;
 
 app.get('/commentstoday', function(req,res){
-    if(!isLoggedIn){
-      res.redirect('/authorize_user');
+    if(!mediaSaved){
+      var commentsTdy= 4;
+      res.send({commentsTdy});
     }
+    else{
 
     var totalComments = mediaSaved.reduce(function(sum, value) {
             return sum + value.comments.count;
@@ -64,64 +121,62 @@ app.get('/commentstoday', function(req,res){
     var commentsTdy = totalComments - prevComments;
 
     res.send({commentsTdy});
+  }
 });
 
 
 
 app.get('/totallikes', function(req,res){
- if(!isLoggedIn){
-      res.redirect('/authorize_user');
+ if(!mediaSaved){
+      var totalLikes = 4;
+      res.send({totalLikes});
     }
+else{
+
 
     var totalLikes = mediaSaved.reduce(function(sum, value) {
             return sum + value.likes.count;
           }, 0);
 
     res.send({totalLikes});
+  }
 
 });
 
 app.get('/totalcomments', function(req,res){
-    if(!isLoggedIn){
-      res.redirect('/authorize_user');
+    if(!mediaSaved){
+      var totalComments = 3;
+      res.send({totalComments})
     }
-
+    else{
     var totalComments = mediaSaved.reduce(function(sum, value) {
             return sum + value.comments.count;
           }, 0);
 
 
     res.send({totalComments});
+  }
 });
 
 
 
 app.get('/followerstoday', function(req,res){
 
-  if(!isLoggedIn){
-      res.redirect('/authorize_user');
-    }
 
-  
+  var tf = followersSaved ? followersSaved.length : 2;
+
   var totfol = followersSaved.length - prevFollowers;
 
   res.send({totfol});
-
 });
 
 var prevFollowers = 2;
 
 app.get('/totalfollowers', function(req,res){
 
-  if(!isLoggedIn){
-      res.redirect('/authorize_user');
-    }
-
-  var totfol = followersSaved.length;
+  var totfol = followersSaved ? followersSaved.length : 0;
 
   res.send({totfol});
-
-
 
 });
 
@@ -163,8 +218,6 @@ api.use({
   client_id: '2baab622a9d44a9d962742f3ba2ae74d',
   client_secret: 'd5145e8c983745f0bef2263a20f9d9bc'
 });
-
-app.set("view engine", "ejs");
 
 var redirect_uri = 'http://127.0.0.1:3000/handleauth';
 
@@ -216,9 +269,9 @@ var handleauth = function(req, res) {
             return sum + value.comments.count;
           }, 0);
 
-          var variables = {medias, followers, likes, comments, tags, top5, totalLikes, totalComments};
+          var variables = { medias, followers, likes, comments, tags, top5, totalLikes, totalComments };
 
-          res.render("index.html.ejs", variables);
+          //res.render("index.html.ejs", variables);
         });
 
       });
