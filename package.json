@@ -5,7 +5,8 @@
   "description": "A starting point to build hackfest apps using Express",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
   },
   "author": "Roger Nesbitt <roger@seriousorange.com>",
   "license": "MIT",

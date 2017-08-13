@@ -89,7 +89,6 @@ var calcbesthour = function(latestpostlikes){
 app.get('/besthourtopost', function(req, res){
   var besthour = calcbesthour(latestpostlikes);
   res.send(besthour);
-
 });
 
 app.use(express.static("static"));
