@@ -98,61 +98,50 @@
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
     <script>
-      google.charts.load('current', {packages: ['corechart', 'bar']});
-google.charts.setOnLoadCallback(drawColColors);
-
-function drawColColors() {
-      var data = new google.visualization.DataTable();
-      data.addColumn('timeofday', 'Time of Day');
-      data.addColumn('number', 'Motivation Level');
-
-      data.addRows([
-        [{v: [8, 0, 0], f: '8 am'}, 1],
-        [{v: [9, 0, 0], f: '9 am'}, 2],
-        [{v: [10, 0, 0], f:'10 am'}, 3],
-        [{v: [11, 0, 0], f: '11 am'}, 4],
-        [{v: [12, 0, 0], f: '12 pm'}, 5],
-        [{v: [13, 0, 0], f: '1 pm'}, 6],
-        [{v: [14, 0, 0], f: '2 pm'}, 7],
-        [{v: [15, 0, 0], f: '3 pm'}, 8],
-        [{v: [16, 0, 0], f: '4 pm'}, 9],
-        [{v: [17, 0, 0], f: '5 pm'}, 10],
-      ]);
-
-      var options = {
-        colors: ['#FD8A1D'],
-        hAxis: {
-          title: 'Time',
-          format: 'h',
-          viewWindow: {
-            min: [0, 0, 0],
-            max: [24, 0, 0]
-          },
-          gridlines: {
-          	color: 'transparent',
-            count: 12,
-          },
-          baselineColor: 'transparent'
+var ctx = document.getElementById("myChart").getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: [0,1,2,3,4,5,6,7,8,9,10,11,12,1,2,3,4,5,6,7,8,9,10,11,12],
+        datasets: [{
+            data: [120,130,100,60,40,80,60,20,10,0,0,10,15,30,60,10,40,10,5,3,0,3,10,8],
+            backgroundColor: 'rgba(255, 160, 71, 0.2)',
+            borderColor: '#FD8A1D',
+            borderWidth: 1
+        }]
+    },
+    options: {
+    		legend: {
+        		display: false
+				},
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                },
+                gridLines: {
+                		display: false
+                },
+            }],
+            xAxes: [{
+            		ticks: {
+                		callback: function(tick, index, array) {
+                    		return (index % 2) ? "" : tick;
+                		}
+                },
+                gridLines: {
+                		display: false
+                }
+            }],
         },
-        vAxis: {
-        	baselineColor: 'transparent',
-          gridlines: {
-          	color: 'transparent',
-            count: 7
-          },
-        },
-        legend: {position: 'none'},
-        bar: {groupWidth: "85%"},
-      };
-
-      var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
-      chart.draw(data, options);
+        cubicInterpolationMode: 'monotone',
     }
+});
     </script>
   </body>
 </html>
