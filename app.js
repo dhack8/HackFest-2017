@@ -12,7 +12,12 @@ app.get('/latestpostlikes', function(req, res) {
 
 
 var mediaSaved;
+var followersSaved;
 var isLoggedIn;
+
+function populateData(){
+
+}
 
 var calclikestoday = function(){
 
@@ -44,30 +49,91 @@ app.get('/likestoday', function(req,res){
     res.send({likesTdy});
 });
 
-/*
+var prevComments = 3;
 
-app.get('/totallikes', function(req,res)){
+app.get('/commentstoday', function(req,res){
+    if(!isLoggedIn){
+      res.redirect('/authorize_user');
+    }
+
+    var totalComments = mediaSaved.reduce(function(sum, value) {
+            return sum + value.comments.count;
+          }, 0);
+
+
+    var commentsTdy = totalComments - prevComments;
+
+    res.send({commentsTdy});
+});
+
+
+
+app.get('/totallikes', function(req,res){
+ if(!isLoggedIn){
+      res.redirect('/authorize_user');
+    }
+
+    var totalLikes = mediaSaved.reduce(function(sum, value) {
+            return sum + value.likes.count;
+          }, 0);
+
+    res.send({totalLikes});
+
+});
+
+app.get('/totalcomments', function(req,res){
+    if(!isLoggedIn){
+      res.redirect('/authorize_user');
+    }
+
+    var totalComments = mediaSaved.reduce(function(sum, value) {
+            return sum + value.comments.count;
+          }, 0);
+
+
+    res.send({totalComments});
+});
+
+
+
+app.get('/followerstoday', function(req,res){
+
+  if(!isLoggedIn){
+      res.redirect('/authorize_user');
+    }
+
+  
+  var totfol = followersSaved.length - prevFollowers;
+
+  res.send({totfol});
+
+});
+
+var prevFollowers = 2;
+
+app.get('/totalfollowers', function(req,res){
+
+  if(!isLoggedIn){
+      res.redirect('/authorize_user');
+    }
+
+  var totfol = followersSaved.length;
+
+  res.send({totfol});
+
+
 
 });
 
 
-app.get('/followerstoday', function(req,res)){
+app.get('/engagementtoday', function(req, res){
 
 });
 
-app.get('/totalfollowers', function(req,res)){
+app.get('/totalengagement', function(req, res){
 
 });
 
-
-app.get('/engagementtoday', function(req, res)){
-
-});
-
-app.get('/totalengagement', function(req, res)){
-
-});
-*/
 
 
 var calcbesthour = function(latestpostlikes){
@@ -125,6 +191,7 @@ var handleauth = function(req, res) {
        //console.log(mediaSaved);
 
         api.user_followers(medias[0].user.id, function(err, users, pagination, remaining, limit) {
+          followersSaved = users;
           // console.log(err);
           // console.log(users);
 
