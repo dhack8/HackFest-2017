@@ -32,7 +32,6 @@ var calcbesthour = function(latestpostlikes){
 app.get('/besthourtopost', function(req, res){
   var besthour = calcbesthour(latestpostlikes);
   res.send(besthour);
-
 });
 
 //fetch("http://localhost:3000/data").then(res => res.json()).then(res => console.log(res));
