@@ -3,6 +3,15 @@
 	$.get('/besthourtopost', (data) => {
 		$('.container h1').text(data.bestHourMessage);
 	});
+
+	$.get('/likestoday', (data) => {
+		$('#likes').text(data.likesTdy);
+	});
+
+	$.get('/followerstoday', (data) => {
+		$('#followers').text(data.totfol);
+	});
+
 	var ctx = document.getElementById("myChart").getContext('2d');
 	var myChart = new Chart(ctx, {
     	type: 'line',
