@@ -10,81 +10,64 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:700" rel="stylesheet">
   </head>
   <body>
-  Hello world~
-<!--<nav class="navbar navbar-expand-lg navbar-dark bg-orange">
+  <nav class="menuFlex">
+    <div class="menuItem">
+      <a>Overview</a>
+    </div>
+    <div class="menuItem">
+      <a>Posts</a>
+    </div>
+    <div class="menuItem">
+      <a>Profile</a>
+    </div>
+  </nav>
+
   <div class="container">
-    <a class="navbar-brand" href="#">#madgainz</a>
-       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample07" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-      <div class="collapse navbar-collapse" id="navbarsExample07">
-        <ul class = "navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#Home">Home <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="#Posts">Posts <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="#Profile">Profile <span class="sr-only">(current)</span></a>
-          </li>
-      </ul>
-      <form class="form-inline my-2 my-md-0">
-        <input class="form-control" type="text" placeholder="Search" aria-label="Search">
-      </form>
+    <div class="jumbotron today">
+      <div class="col-sm-8 mx-auto">
+        <a name="Home"><h2>Today</h2></a>
+        <div class="myflex">
+          <div class="flexchild">
+            <p class="title">Likes</p>
+            <h3>130</h3>
+            <p class="change">+75</p>
+          </div>
+          <div class="flexchild">
+            <p class="title">Followers</p>
+            <h3>54</h3>
+            <p class="change">+14</p>
+          </div>
+          <div class="flexchild">
+            <p class="title">Engagement</p>
+            <h3>802</h3>
+            <p class="change">+134</p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-</nav>
-    <div class="container">
-      <div class="jumbotron">
-        <div class="col-sm-8 mx-auto">
-          <a name="Home"><h2>Recommendation</h2></a>
-          <p>Today, based on your previous posts:</p>
-          <h1>Best time for you to post is<br>6 - 8pm</h1>
-          <p>
-            <a class="btn btn-primary" href="https://www.instagram.com/" role="button">Post on Instagram now</a>
-          </p>
-        </div>
-      </div>
-    </div>
 
-    <div class="container">
-      <div class="jumbotron">
+  <div class="container">
+    <div class="jumbotron recommend">
       <div class="col-sm-8 mx-auto">
-          <h2>Likes on latest post</h2>
-        </div>
+        <a><h2>Recommendation</h2></a>
+        <h1>Best time for you to post is<br>6 - 8pm</h1>
+        <p class="centerText">
+          <a class="btn btn-primary" href="https://www.instagram.com/" role="button">Post now</a>
+        </p>
       </div>
     </div>
+  </div>
 
-    <div class="container">
-      <div class="jumbotron">
-        <div class="col-sm-8 mx-auto">
-          <a name="Posts"><h2>Post engagement</h2></a>
-          <p>Based on likes and comments on each post, compared to your average engagemnt</p>
-          <p>Sort by</p>
-          <p>
-            <a class="btn btn-primary" href="" role="button">Most recent</a>
-          </p>
-          <p>
-            <a class="btn btn-primary" href="" role="button">Popularity</a>
-          </p>
-          <br />
-        </div>
+  <div class="container">
+    <div class="jumbotron">
+      <div class="col-sm-8 mx-auto">
+        <h2>Likes on latest post</h2>
+        <p>Posted on <span class="blue">Thursday at 6pm</span></p>
       </div>
     </div>
+  </div>
 
-    <div class="container">
-      <div class="jumbotron">
-        <div class="col-sm-8 mx-auto">
-          <a name="Profile"><h2>This week</h2></a>
-          <p>Followers    Clicks on bio URL    Engagement</p>
-          <p><%= likes.count+comments.count %></p>
-          <h2>Location</h2>
-          <img src="cat.jpg" width="250" height="200" class = image alt = "cat"/>
-          <h2>Your followers' followers</h2>
-        </div>
-      </div>
-    </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <!--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

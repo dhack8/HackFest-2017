@@ -1,3 +1,10 @@
+.jumbotron{
+  margin-top: 10px;
+  background-color: white;
+  padding: 0px;
+  padding-top: 5px;
+}
+
 a {
 	text-decoration: none;
 }
@@ -6,28 +13,62 @@ a {
 	text-decoration: underline;
 }
 
-.navbar a:active {
-	text-decoration: underline !important;
-}
-
 body{
+	padding-top: 64px;
   background-color: white;
   font-family: 'Montserrat', sans-serif;
 }
 
+.menuFlex{
+	display: flex;
+	height: 64px;
+	position: fixed;
+	background-color: #FD8A1D;
+	width: 100%;
+	line-height: 64px;
+	color: #FFF;
+	font-weight: bold;
+	top: 0px;
+}
+
+.menuItem{
+	text-align: center;
+	flex: 1 1 100%;
+}
+
+.myflex{
+	display: flex;
+}
+
+.flexchild{
+	text-align: center;
+	flex: 1 1 100%;
+}
+
+.title{
+	font-size: 10px;
+	margin-bottom: 6px;
+}
+
+.today{
+	margin-bottom: 0px;
+}
+
+.change{
+	color: #FD8A1D;
+	margin-bottom: 0px;
+}
+
+.blue{
+	color: #67C3EF;
+}
+
+.recommend{
+	margin-bottom: 15px;
+}
+
 .bg-orange{
   background-color: #FD8A1D;
-}
-
-.navbar-dark .navbar-toggler{
-  border-color: white;
-}
-
-.jumbotron{
-  margin-top: 10px;
-  background-color: white;
-  padding: 0px;
-  padding-top: 5px;
 }
 
 .container{
@@ -39,8 +80,14 @@ body{
 	border-color: #67C3EF;
 	background-color: #FFF;
 	border-radius: 18px;
-	margin: 2px;
-	float: right;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.centerText{
+	text-align: center;
+	margin-bottom: 0px;
+	margin-top: 12px;
 }
 
 .btn-primary, .btn-primary:hover {
@@ -60,17 +107,4 @@ h2{
 
 li {
 	list-style-type: none;
-}
-
-@media (min-width:992px){
-	.container{
-		max-width:960px;
-		padding-right: 200px;
-	}
-}
-@media (min-width:1200px){
-	.container{
-		max-width:1000px;
-		padding-right: 240px;
-	}
 }
