@@ -8,7 +8,7 @@ var latestpostlikes = require('./latestpostlikes.json');
 console.log(latestpostlikes.posts[0].id);
 
 app.get('/latestpostlikes', function(req, res) {
-  res.send(latestpostlikes);
+  res.send(latestpostlikes.posts[0]);
 });
 
 
@@ -24,6 +24,8 @@ var calcbesthour = function(latestpostlikes){
       }
   });
 
+  var low = null;
+  var high = null;
 
 
 
@@ -37,6 +39,11 @@ app.get('/besthourtopost', function(req, res){
   res.send(besthour);
 
 });
+
+
+app.get('')
+
+
 
 
 
@@ -68,17 +75,17 @@ var handleauth = function(req, res) {
       });
 
       api.user_self_media_recent(function(err, medias, pagination, remaining, limit) {
-        console.log(err);
-        console.log(medias);
-        console.log(medias[0].id);
-        console.log(medias[0].user.id);
-        console.log(pagination);
-        console.log(remaining);
-        console.log(limit);
+        // console.log(err);
+        // console.log(medias);
+        // console.log(medias[0].id);
+        // console.log(medias[0].user.id);
+        // console.log(pagination);
+        // console.log(remaining);
+        // console.log(limit);
 
         api.user_followers(medias[0].user.id, function(err, users, pagination, remaining, limit) {
-          console.log(err);
-          console.log(users);
+          // console.log(err);
+          // console.log(users);
 
           var followers = users;
 
