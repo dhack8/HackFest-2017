@@ -100,7 +100,7 @@ var prevLikes = 2;
 
 app.get('/likestoday', function(req,res){
     if(!mediaSaved){
-      var likesTdy = 2;
+      var likesTdy = 5;
       res.send({likesTdy});
     }
     else{
@@ -141,7 +141,7 @@ app.get('/commentstoday', function(req,res){
 
 app.get('/totallikes', function(req,res){
  if(!mediaSaved){
-      var totalLikes = 4;
+      var totalLikes = 73;
       res.send({totalLikes});
     }
 else{
@@ -172,19 +172,19 @@ app.get('/totalcomments', function(req,res){
 });
 
 
-var prevFollowers = 2;
+var prevFollowers = 1;
 app.get('/followerstoday', function(req,res){
 if(!followersSaved){
 
 
-    var folToday = 3;
-    res.send({folToday});
+    var totfol = 2;
+    res.send({totfol});
 }
 else{
 
-  var folToday = followersSaved.length - prevFollowers;
+  var totfol = followersSaved.length - prevFollowers;
 
-  res.send({folToday});
+  res.send({totfol});
 }
 
 
@@ -194,7 +194,7 @@ else{
 
 app.get('/totalfollowers', function(req,res){
   if(!followersSaved){
-    var totfol = 9;
+    var totfol = 3;
     res.send({totfol});
   }
   else{
@@ -209,13 +209,13 @@ app.get('/totalfollowers', function(req,res){
 
 app.get('/engagementtoday', function(req, res){
 
-  var engtoday = 5;
+  var engtoday = 34;
   res.send({engtoday});
 
 });
 
 app.get('/totalengagement', function(req, res){
-   var toteng = 139;
+   var toteng = 151;
   res.send({toteng});
 
 });

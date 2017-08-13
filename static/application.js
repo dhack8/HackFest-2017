@@ -5,19 +5,19 @@
 	});
 
 	$.get('/likestoday', (data) => {
-		$('#likesToday').text(data.likesTdy);
+		$('#likesToday').append(data.likesTdy);
 	});
 
 	$.get('/followerstoday', (data) => {
-		$('#followersToday').text(data.folToday);
+		$('#followersToday').append(data.totfol);
 	});
 
 	$.get('/engagementtoday', (data) => {
-		$('#engagementToday').text(data.engtoday);
+		$('#engagementToday').append(data.engtoday);
 	});
 
 	$.get('/totallikes', (data) => {
-		$('#likes').text(data.totallikes);
+		$('#likes').text(data.totalLikes);
 	});
 
 	$.get('/totalfollowers', (data) => {
@@ -26,6 +26,11 @@
 
 	$.get('/totalengagement', (data) => {
 		$('#engagement').text(data.toteng);
+	});
+
+	$.get('/timeofmostrecentpost', (data) => {
+		myDate = new Date(1000*data.time);
+		$('.blue').text(myDate.toString().substring(0, 24));
 	});
 
 	var ctx = document.getElementById("myChart").getContext('2d');
