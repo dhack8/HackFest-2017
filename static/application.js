@@ -12,6 +12,10 @@
 		$('#followers').text(data.totfol);
 	});
 
+	$.get('/engagementtoday', (data) => {
+		$('#engagement').text(data.engtoday);
+	});
+
 	var ctx = document.getElementById("myChart").getContext('2d');
 	var myChart = new Chart(ctx, {
     	type: 'line',
