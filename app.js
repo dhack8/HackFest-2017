@@ -202,7 +202,7 @@ app.get('/totalfollowers', function(req,res){
 
   res.send({totfol});
   }
-  
+
 
 });
 
@@ -234,7 +234,7 @@ var calcbesthour = function(latestpostlikes){
       }
   });
   return {
-    bestHourMessage: "Best time for you to post is" + TIMES_MAP[bestHour]
+    bestHourMessage: TIMES_MAP[bestHour]
   };
 };
 
