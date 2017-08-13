@@ -5,11 +5,69 @@ var app = express();
 
 var latestpostlikes = require('./latestpostlikes.json');
 
-console.log(latestpostlikes.posts[0].id);
 
 app.get('/latestpostlikes', function(req, res) {
   res.send(latestpostlikes.posts[0]);
 });
+
+
+var mediaSaved;
+var isLoggedIn;
+
+var calclikestoday = function(){
+
+  api.user_self_media_recent(function(err, medias, pagination, remaining, limit) {
+    var totalLikes = medias.reduce(function(sum, value) {
+            return sum + value.likes.count;
+          }, 0);
+
+
+    return totalLikes;
+  });
+}
+
+
+var prevLikes = 2;
+
+app.get('/likestoday', function(req,res){
+    if(!isLoggedIn){
+      res.redirect('/authorize_user');
+    }
+
+    var totalLikes = mediaSaved.reduce(function(sum, value) {
+            return sum + value.likes.count;
+          }, 0);
+
+
+    var likesTdy = totalLikes - prevLikes;
+
+    res.send({likesTdy});
+});
+
+/*
+
+app.get('/totallikes', function(req,res)){
+
+});
+
+
+app.get('/followerstoday', function(req,res)){
+
+});
+
+app.get('/totalfollowers', function(req,res)){
+
+});
+
+
+app.get('/engagementtoday', function(req, res)){
+
+});
+
+app.get('/totalengagement', function(req, res)){
+
+});
+*/
 
 
 var calcbesthour = function(latestpostlikes){
@@ -24,7 +82,7 @@ var calcbesthour = function(latestpostlikes){
       }
   });
   return {
-    bestHourMessage: "Best time for you to post is: " + bestHour
+    bestHourMessage: "Best time for you to post is<br>" + TIMES_MAP[bestHour]
   };
 };
 
@@ -34,7 +92,6 @@ app.get('/besthourtopost', function(req, res){
 
 });
 
-//fetch("http://localhost:3000/data").then(res => res.json()).then(res => console.log(res));
 app.use(express.static("static"));
 
 api.use({
@@ -53,22 +110,20 @@ var authorize_user = function(req, res) {
 var handleauth = function(req, res) {
   api.authorize_user(req.query.code, redirect_uri, function(err, result) {
     if (err) {
-      console.log(err.body);
+      //console.log(err.body);
       res.send("Didn't work");
     } else {
+      isLoggedIn = true;
       console.log("Connection succeeded. Access token is"  + result.access_token);
       api.use({
         access_token: result.access_token
       });
+      console.log(result.access_token);
 
       api.user_self_media_recent(function(err, medias, pagination, remaining, limit) {
-        // console.log(err);
-        // console.log(medias);
-        // console.log(medias[0].id);
-        // console.log(medias[0].user.id);
-        // console.log(pagination);
-        // console.log(remaining);
-        // console.log(limit);
+       mediaSaved = medias;
+       //console.log(medias);
+       //console.log(mediaSaved);
 
         api.user_followers(medias[0].user.id, function(err, users, pagination, remaining, limit) {
           // console.log(err);
@@ -118,4 +173,33 @@ app.get('/', function(req, res) {
 
 app.listen(3000, function () {
   console.log('App listening on port 3000!')
-})
+});
+
+
+const TIMES_MAP = {
+        "00": "12 am",
+        "01": "1 am",
+        "02": "2 am",
+        "03": 60,
+        "04": 40,
+        "05": 80,
+        "06": 60,
+        "07": 20,
+        "08": 10,
+        "09": 0,
+        "10": 0,
+        "11": 10,
+        "12": 15,
+        "13": 30,
+        "14": 60,
+        "15": 10,
+        "16": 40,
+        "17": 10,
+        "18": 5,
+        "19": 3,
+        "20": 0,
+        "21": 3,
+        "22": 10,
+        "23": 8
+
+}
