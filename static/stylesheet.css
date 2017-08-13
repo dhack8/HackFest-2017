@@ -19,16 +19,23 @@ body{
   font-family: 'Montserrat', sans-serif;
 }
 
+.header{
+	width: 100%;
+	position: fixed;
+	z-index: 99;
+	top: 0px;
+	left: 0px;
+	background-color: #FD8A1D;
+}
+
 .menuFlex{
 	display: flex;
 	height: 64px;
-	position: fixed;
 	background-color: #FD8A1D;
 	width: 100%;
 	line-height: 64px;
 	color: #FFF;
 	font-weight: bold;
-	top: 0px;
 }
 
 .menuItem{

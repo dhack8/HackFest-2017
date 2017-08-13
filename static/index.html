@@ -10,17 +10,21 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:700" rel="stylesheet">
   </head>
   <body>
-  <nav class="menuFlex">
-    <div class="menuItem">
-      <a>Overview</a>
+  <header class="header">
+    <div class="container">
+      <nav class="menuFlex">
+        <div class="menuItem">
+          <a>Overview</a>
+        </div>
+        <div class="menuItem">
+          <a>Posts</a>
+        </div>
+        <div class="menuItem">
+          <a>Profile</a>
+        </div>
+      </nav>
     </div>
-    <div class="menuItem">
-      <a>Posts</a>
-    </div>
-    <div class="menuItem">
-      <a>Profile</a>
-    </div>
-  </nav>
+  </header>
 
   <div class="container">
     <div class="jumbotron today">
@@ -64,8 +68,7 @@
       <div class="col-sm-8 mx-auto">
         <h2>Likes on latest post</h2>
         <p>Posted on <span class="blue">Thursday at 6pm</span></p>
-            <canvas id="myChart" width="200" height="200"></canvas>
-
+        <canvas id="myChart" width="200" height="200"></canvas>
       </div>
     </div>
   </div>
