@@ -11,6 +11,35 @@ app.get('/latestpostlikes', function(req, res) {
   res.send(latestpostlikes);
 });
 
+
+var calcbesthour = function(latestpostlikes){
+  var likesovertime = latestpostlikes.posts[0].likesOverTime;
+  var besthourCount = null
+  var bestHour = null;
+  Object.keys(likesovertime).forEach(function (hour) {
+      var countForHour = likesovertime[hour];
+      if (countForHour > besthourCount) {
+          bestHour = hour;
+          besthourCount = countForHour;
+      }
+  });
+
+
+
+
+  return {
+    bestHourMessage: "Best time for you to post is: " + bestHour
+  };
+};
+
+app.get('/besthourtopost', function(req, res){
+  var besthour = calcbesthour(latestpostlikes);
+  res.send(besthour);
+
+});
+
+
+
 //fetch("http://localhost:3000/data").then(res => res.json()).then(res => console.log(res));
 app.use(express.static("static"));
 
@@ -89,8 +118,8 @@ app.get('/authorize_user', authorize_user);
 app.get('/handleauth', handleauth);
 
 app.get('/', function(req, res) {
-  res.sendFile('static/index.html');
-  //res.redirect('/authorize_user');
+  //res.sendFile('static/index.html');
+  res.redirect('/authorize_user');
 });
 
 
