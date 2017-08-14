@@ -1,25 +1,9 @@
-# Hackfest Starter Pack
+# Hackfest 2017, Insta Insights
 
-First up, install NodeJS from nodejs.org.  At the time of writing you probably want v4.5.0 LTS.
+For the Hackfest the team eventually decided on making an Instagram analytics mobile first web app. The goal was to OAuth and be able to query the Instagram API but due to time restrictions and the sandbox mode, we eventually had to settle for the Node.js server to provide "live" dummy data to the client.
 
-To get this demo up and running, clone it into a directory somewhere and run:
+Some of the code is pretty messy, after all, it was "hacked" out. The team used GitHub and Agile methodologies to aid in efficient somewhat parallel development.
 
-```bash
-$ npm install
-```
+The end goal would be to provide more working features and expand the service to other social media platforms.
 
-This will download all the NPM packages required to make this application run.
 
-Get an API key from <https://developer.forecast.io/register> and put it into `app.js` in the correct place:
-
-```javascript
-var forecastIOKey = "your key goes here";
-```
-
-Then you're ready to run it:
-
-```bash
-$ node app.js
-```
-
-Navigating in your browser to <http://localhost:3000> will display the site.
