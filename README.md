@@ -6,4 +6,6 @@ Some of the code is pretty messy, after all, it was "hacked" out. The team used 
 
 The end goal would be to provide more working features and expand the service to other social media platforms.
 
+Can be viewed live on Heroku here: https://mighty-cliffs-45745.herokuapp.com/ intended to be a saved webpage to the home screen of a mobile device.
+
 
