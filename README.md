@@ -8,4 +8,6 @@ The end goal would be to provide more working features and expand the service to
 
 Can be viewed live on Heroku here: https://mighty-cliffs-45745.herokuapp.com/ intended to be a saved webpage to the home screen of a mobile device.
 
+![alt text](https://raw.githubusercontent.com/dhack8/HackFest-2017/master/Insta-Insights-Hackfest.png)
+
 
